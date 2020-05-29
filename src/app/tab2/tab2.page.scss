@@ -1,0 +1,19 @@
+.my-custom-class {
+  --background: #222;
+  --spinner-color: #fff;
+
+  color: #fff;
+}
+
+.container {
+  width: 200px;
+  background-color: white;
+  overflow: hidden; 
+  white-space: nowrap;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll {
+    overflow-x: auto;
+  }
+}

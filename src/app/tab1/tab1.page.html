@@ -1,0 +1,66 @@
+<ion-content [fullscreen]="true">
+ <p align="center"> <img src="assets/imgs/account.png" height="100" width="100"></p>
+
+<ng-container *ngIf="this.userexist ; else register">
+
+  <ion-item>
+    <ion-label>
+    <b>First Name</b>
+    </ion-label>
+    <ion-input [(ngModel)]="this.FirstName"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+    <b>Last Name</b>
+    </ion-label>
+    <ion-input [(ngModel)]="this.LastName"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+    <b>Phone</b>
+    </ion-label>
+    <ion-input [(ngModel)]="this.Phone"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+    <b>E-mail</b>
+    </ion-label>
+    <ion-input [(ngModel)]="this.Email"></ion-input>
+  </ion-item>
+
+  <br>
+<br>
+<br>
+    <ion-button expand="block" color="success" (click)="updateuser()">Update</ion-button>
+    <ion-button expand="block" color="danger" (click)="logout()">Sign out</ion-button>
+
+</ng-container>
+
+<ng-template #register>
+<br>
+
+<ion-item>
+  <ion-label position="stacked">E-mail<ion-text color="danger">*</ion-text></ion-label>
+  <ion-input [(ngModel)]="txtemail" required type="email"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="stacked">Password<ion-text color="danger">*</ion-text></ion-label>
+  <ion-input [(ngModel)]="txtpassword" required type="password"></ion-input>
+</ion-item>
+
+    <ion-button color="success" expand="block" (click)="signuser()">Sign in</ion-button>
+    <ion-item lines="none">
+<ion-button slot="end" size="small" (click)="forgetemail()" color="danger">Forgot password</ion-button>
+
+      </ion-item>
+<br>
+<ion-button expand="block" (click)="registeruser()">Create Account</ion-button>
+
+
+</ng-template>
+
+
+</ion-content>

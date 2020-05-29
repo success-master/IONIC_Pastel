@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "730296171506",
+    "firebase_url": "https://orderz-app.firebaseio.com",
+    "project_id": "orderz-app",
+    "storage_bucket": "orderz-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730296171506:android:2ef7b2a14c1f4a16e5896b",
+        "android_client_info": {
+          "package_name": "com.orderz.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730296171506-9o3fvuuj3b7qirobkg4a1p07pr1r26lt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyRj4Mf13k05xQZwKi0UrolrpmZKNy0ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730296171506-9o3fvuuj3b7qirobkg4a1p07pr1r26lt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "730296171506-p8bi745elm0b5fjqdr1lb6hgfb06srmj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.orderz.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

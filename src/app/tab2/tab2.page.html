@@ -1,0 +1,90 @@
+<ion-content [fullscreen]="true">
+  <table style="height: 44px;" width="389">
+    <tbody>
+      <tr>
+        <td style="width: 122px;">&nbsp;</td>
+        <td style="width: 122px; text-align: center;">
+          <h4>
+            <font color="#488aff">
+              {{this.location_name}}
+            </font>
+          </h4>
+        </td>
+        <td style="width: 100px; text-align: left;">
+          <ion-button
+            (click)="getaddress()"
+            shape="round"
+            size="small"
+            color="danger"
+            ><ion-icon name="arrow-down-circle-outline"></ion-icon
+          ></ion-button>
+        </td>
+      </tr>
+      <tr>
+        <td style="width: 122px; text-align: center;" colspan="3">
+          {{this.location_address}} - {{this.location_locality}}
+          {{this.location_state}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+
+  <ion-segment scrollable="true">
+    <ion-button shape="round" (click)="getcatalogueInfo()">
+      All
+    </ion-button>
+    <ion-button
+      shape="round"
+      *ngFor="let item of filtered_result_category ; let i = index"
+      (click)="filterByCategory(item.id,item.category_data.name)"
+    >
+      {{item.category_data.name}}
+    </ion-button>
+  </ion-segment>
+
+  <ion-list *ngFor="let item of filtered_result ; let i = index">
+    <ion-item
+      (click)="openModal(item.element.image_id,this.filtered_result_images,item.element.item_data?.name,item.element.item_data?.description,item.element.item_data?.variations,item.modifier_id)"
+    >
+      <ion-thumbnail slot="end">
+        <ng-container *ngIf="item.element.image_id ; else elsephoto">
+          <ng-container *ngFor="let image of this.filtered_result_images ">
+            <ng-container *ngIf="item.element.image_id == image.id">
+              <img src="{{image.image_data.url}}" />
+            </ng-container>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #elsephoto>
+          <img src="assets/imgs/nophoto.png" />
+        </ng-template>
+      </ion-thumbnail>
+
+      <ion-label>
+        <h2><b>{{item.element.item_data?.name}}</b></h2>
+        <h3>{{item.element.item_data?.description}}</h3>
+
+        <p
+          *ngFor="let subitem of item.element.item_data?.variations; let i = index"
+        >
+          <ng-container *ngIf="subitem.item_variation_data.name !== 'Regular'">
+            {{ subitem.item_variation_data.name }}
+          </ng-container>
+
+          {{ subitem.item_variation_data.price_money.amount/100 | currency}}
+        </p>
+      </ion-label>
+
+      <ion-list
+        lines="none"
+        *ngFor="let subitem of this.subitem; let i = index"
+      >
+        <ion-label
+          >{{ subitem.item_variation_data.name }} - {{
+          subitem.item_variation_data.price_money.amount }}</ion-label
+        >
+      </ion-list>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,80 @@
+<!-- my-modal.page.html -->
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-title size="large">{{this?.nameproduto}}</ion-title>
+
+    <ion-button slot="end" shapr="round" color="danger" (click)="closeModal()"
+      >Cancel</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card>
+    <ng-container *ngIf="this.idimagem ; else elsephoto">
+      <ng-container *ngFor="let item of this.image">
+        <ng-container *ngIf="this.idimagem == item.id">
+          <p align="center">
+            <img src="{{item?.image_data.url}}" width="300" height="200" />
+          </p>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-template #elsephoto>
+      <p align="center">
+        <img src="assets/imgs/nophoto.png" width="300" height="200" />
+      </p>
+    </ng-template>
+
+    <ion-card-header> </ion-card-header>
+    <ion-card-content>
+      {{this?.description}}
+      <ion-item
+        lines="none"
+        *ngFor="let subitem of this.subitem; let i = index"
+      >
+        <ion-label
+          >{{ subitem.item_variation_data.name }} - {{
+          subitem.item_variation_data.price_money.amount/100 | currency}}
+        </ion-label>
+        <ion-icon
+          color="danger"
+          name="remove-circle"
+          (click)="decrement()"
+        ></ion-icon>
+        {{currentNumber}}
+        <ion-icon
+          color="danger"
+          name="add-circle"
+          (click)="increment()"
+        ></ion-icon>
+      </ion-item>
+
+      <ng-container *ngIf="this.modifierid !== 'no'">
+        <b>Customize (Optional)</b>
+      </ng-container>
+
+      <ion-item
+        lines="none"
+        *ngFor="let modifier of filtered_result_modifierItems; let i = index"
+      >
+        <ion-label
+          >{{ modifier.modifier_data.name }} - {{
+          modifier.modifier_data.price_money.amount/100 | currency}}</ion-label
+        >
+        <ion-checkbox slot="end"></ion-checkbox>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-footer>
+    <ion-toolbar>
+      <p align="center">
+        <ion-button color="success" (click)="closeModal()"
+          >Add to Cart</ion-button
+        >
+      </p>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

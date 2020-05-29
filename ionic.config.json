@@ -1,0 +1,8 @@
+{
+  "name": "Orderz",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
