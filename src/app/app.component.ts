@@ -6,7 +6,7 @@ import { StatusBar } from "@ionic-native/status-bar/ngx";
 // FCM
 import * as firebase from "firebase/app";
 import { User } from "./modals/register/register.page";
-
+import { ApiService } from "./service/api.service";
 @Component({
   selector: "app-root",
   templateUrl: "app.component.html",
@@ -16,8 +16,13 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public apiService: ApiService
   ) {
+    if (JSON.parse(localStorage.getItem("cartData"))) {
+      this.apiService.orders = JSON.parse(localStorage.getItem("cartData"));
+    }
+
     this.initializeApp();
     this.loadlocation();
   }

@@ -20,6 +20,7 @@ import { environment } from "../environments/environment";
 import { HTTP } from "@ionic-native/http/ngx";
 // FCM
 import { FCM } from "@ionic-native/fcm/ngx";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { FCM } from "@ionic-native/fcm/ngx";
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

@@ -1,3 +1,4 @@
+import { element } from "protractor";
 import { Component } from "@angular/core";
 import {
   AngularFireDatabase,
@@ -100,7 +101,8 @@ export class Tab2Page {
     nameproduto,
     description,
     subitens,
-    modifierid
+    modifierid,
+    element
   ) {
     const modal = await this.modalController.create({
       component: MyModalPage,
@@ -112,6 +114,7 @@ export class Tab2Page {
         description,
         subitens,
         modifierid,
+        element,
       },
     });
     modal.onDidDismiss().then((dataReturned) => {
@@ -207,7 +210,6 @@ export class Tab2Page {
       .then(async (response) => {
         this.items = JSON.parse(response.data);
         this.listData = this.items.objects;
-        console.log("complete", this.listData);
         await this.filterAll(this.listData);
         await this.filterCategoryAll(this.listData);
       });
@@ -240,7 +242,6 @@ export class Tab2Page {
       }
     });
     this.filtered_result = completeresult;
-    console.log("All", this.filtered_result);
   }
 
   async filterCategoryAll(data) {
@@ -257,13 +258,11 @@ export class Tab2Page {
         element.present_at_location_ids.forEach((elelocation) => {
           if (elelocation === this.location_id) {
             completeresultcategory.push(element);
-            //        console.log('achei');
           }
         });
       }
     });
     this.filtered_result_category = completeresultcategory;
-    //         console.log('filtrado categoria', this.filtered_result_category);
   }
 
   async filterByCategory(data, name) {
@@ -302,12 +301,10 @@ export class Tab2Page {
       )
       .then((response) => {
         this.images = JSON.parse(response.data);
-        console.log("images producao", this.images);
         this.filtered_result_images = this.images.objects;
         if (this.filtered_result_images.length > 0) {
           this.imgicon = this.images.objects.id;
         } else {
-          console.log("no image found");
         }
       });
   }

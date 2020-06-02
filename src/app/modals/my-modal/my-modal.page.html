@@ -63,7 +63,10 @@
           >{{ modifier.modifier_data.name }} - {{
           modifier.modifier_data.price_money.amount/100 | currency}}</ion-label
         >
-        <ion-checkbox slot="end"></ion-checkbox>
+        <ion-checkbox
+          slot="end"
+          (ionChange)="checkboxClick($event, modifier.id)"
+        ></ion-checkbox>
       </ion-item>
     </ion-card-content>
   </ion-card>
@@ -71,9 +74,7 @@
   <ion-footer>
     <ion-toolbar>
       <p align="center">
-        <ion-button color="success" (click)="closeModal()"
-          >Add to Cart</ion-button
-        >
+        <ion-button color="success" (click)="addCart()">Add to Cart</ion-button>
       </p>
     </ion-toolbar>
   </ion-footer>

@@ -1,10 +1,58 @@
-
 <ion-content [fullscreen]="true">
-  <p align="center"> <img src="assets/imgs/fooddelivery.png" height="100" width="100"></p>
- 
+    <p align="center">
+        <img src="assets/imgs/fooddelivery.png" height="100" width="100" />
+    </p>
+    <ng-container *ngIf="cartData">
+        <ion-list *ngFor="let item of cartData">
+            <ion-item>
+                <ion-thumbnail slot="end">
+                    <ng-container *ngIf="item.image_id ; else elsephoto">
+                        <ng-container *ngFor="let image of this.filtered_result_images ">
+                            <ng-container *ngIf="item.image_id == image.id">
+                                <img src="{{image.image_data.url}}" />
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                    <ng-template #elsephoto>
+                        <img src="assets/imgs/nophoto.png" />
+                    </ng-template>
+                </ion-thumbnail>
+                <ion-label>
+                    <h2><b>{{item.note}}</b></h2>
+                    <h3>{{item.description}}</h3>
+                    <p>
+                        {{ item.amount/100 | currency}} &nbsp; &nbsp;
+                        <span class="count-group" *ngIf="!isActive">
+              <img src="assets/imgs/minus.png" class="img-res"
+                (click)="decrement(item.quantity, item.catalog_object_id)" /><span>{{item.quantity}}</span>
 
-  
-  <!--
-  <app-explore-container name="Tab 3 page"></app-explore-container>
--->
+                        <img src="assets/imgs/plus.png" class="img-res" (click)="increment(item.quantity, item.catalog_object_id)" />
+                        </span>
+                    </p>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </ng-container>
+    <hr />
+    <h2>
+        Orders
+    </h2>
+    <ng-container *ngIf="orderItems">
+        <ion-list *ngFor="let item of orderItems;let i = index">
+            <h3 class="order-text">
+                Order ID: {{i + 1}} {{item.updated_at | date:'medium'}}
+            </h3>
+            <ion-item *ngFor="let data of item.line_items">
+                <ion-label>
+                    <h2>
+                        <b>{{data.note}}</b> &nbsp; &nbsp;{{ data.base_price_money.amount/100 | currency}}
+                    </h2>
+                    <h3>State: {{item.state}}</h3>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </ng-container>
+    <div class="full-width">
+        <ion-button expand="full" color="secondary" (click)="placeOrder()">Place Order</ion-button>
+    </div>
 </ion-content>
